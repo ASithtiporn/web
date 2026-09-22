@@ -100,8 +100,8 @@ button:disabled {
 }
 
 .brand-name {
-    font-size: 25px;
-    font-weight: 400;
+    font-size: 38px;
+    font-weight: 500;
     letter-spacing: -0.5px;
 }
 
@@ -110,8 +110,8 @@ button:disabled {
     align-items: center;
     gap: 5px;
     margin-top: -2px;
-    font-size: 12px;
-    font-weight: 300;
+    font-size: 14px;
+    font-weight: 400;
     opacity: 0.75;
 }
 
