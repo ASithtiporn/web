@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Smart Farm</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <div class="farm-background"></div>
+    <div class="farm-overlay"></div>
+
+    <header class="topbar">
+        <div class="brand-area">
+            <div class="brand-name">
+                <h2>Smart Control Water</h2>
+            </div>
+
+            <div class="brand-location">
+                <span>⌖</span>
+                Thai Switchboard And Metal Work CO. LTD (TAMCO)
+            </div>
+        </div>
+
+        <div class="top-actions">
+            <button class="icon-button notification-button">
+                <span>♧</span>
+                <i></i>
+            </button>
+
+            <div class="profile">
+                <div class="profile-avatar">🌱</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="content">
+
+        <section class="page active" id="pageHome">
+
+            <div class="hero-weather">
+                <div class="date-text" id="todayDate">วันนี้</div>
+
+                <div class="temperature-row">
+                    <div class="big-temperature">
+                        <span id="tempValue">--</span><small>°C</small>
+                    </div>
+
+                    <div class="weather-card glass">
+                        <div class="weather-icon">☁</div>
+
+                        <div class="weather-title">
+                            <h3>สภาพแวดล้อม</h3>
+                        </div>
+
+                        <div class="weather-values">
+                            <span>💧 <b id="humidityValue">--</b>%</span>
+                            <span>🌡 <b id="externalTemp">--</b>°C</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card suggestion-card">
+
+                <div class="card-heading">
+                    <div>
+                        <div class="card-title">
+                            <h3>สภาพอากาศ</h3>
+                        </div>
+                        <div class="card-subtitle">ภาพรวมระบบ</div>
+                    </div>
+
+                    <div class="round-icon">⌁</div>
+                </div>
+
+                <div class="status-list">
+
+                    <div class="status-row">
+                        <div class="status-icon soil-icon">🌱</div>
+
+                        <div class="status-info">
+                            <div class="status-name">
+                                <h3>ความชื้นในดิน</h3>
+                            </div>
+
+                            <div class="status-description" id="soilCondition">
+                                กำลังอ่านค่า
+                            </div>
+                        </div>
+
+                        <div class="status-value">
+                            <strong id="soilValue">--</strong>%
+                        </div>
+                    </div>
+
+                    <div class="status-row">
+                        <div class="status-icon">💨</div>
+
+                        <div class="status-info">
+                            <div class="status-name">
+                                <h3>พัดลมระบายอากาศ</h3>
+                            </div>
+
+                            <div class="status-description" id="fanStatus">
+                                กำลังอ่านค่า
+                            </div>
+                        </div>
+
+                        <div class="mini-status" id="fanBadge">--</div>
+                    </div>
+
+                    <div class="status-row">
+                        <div class="status-icon">⚡</div>
+
+                        <div class="status-info">
+                            <div class="status-name">
+                                <h3>อุปกรณ์ควบคุม</h3>
+                            </div>
+
+                            <div class="status-description" id="deviceText">
+                                กำลังตรวจสอบ
+                            </div>
+                        </div>
+
+                        <div class="mini-status" id="connectionBadge">--</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="glass-card irrigation-card">
+
+                <div class="card-heading">
+                    <div>
+                        <div class="card-title">ระบบรดน้ำ</div>
+                        <div class="card-subtitle" id="systemSubStatus">
+                            ระบบพร้อมใช้งาน
+                        </div>
+                    </div>
+
+                    <div class="system-pill" id="systemStatus">
+                        หยุดทำงาน
+                    </div>
+                </div>
+
+                <div class="irrigation-main">
+                    <div class="water-icon">💧</div>
+
+                    <div class="irrigation-info">
+                        <div class="irrigation-title" id="activeZone">
+                            ยังไม่มีวาล์วทำงาน
+                        </div>
+
+                        <div class="irrigation-time" id="runTime">
+                            --
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mode-display">
+                    <span>โหมดการทำงาน</span>
+                    <strong id="modeStatus">MANUAL</strong>
+                </div>
+
+            </div>
+
+            <div class="glass-card zone-preview-card">
+
+                <div class="card-heading">
+                    <div>
+                        <div class="card-title">สถานะวาล์วน้ำ</div>
+                        <div class="card-subtitle">
+                            แสดงสถานะการเปิด-ปิดวาล์ว
+                        </div>
+                    </div>
+                </div>
+
+                <div class="zone-grid">
+
+                    <div class="zone-small" id="homeZone1">
+                        <span class="zone-number">01</span>
+                        <span class="zone-name">
+                            <h2>วาล์ว 1</h2>
+                        </span>
+                        <span class="zone-state" id="homeZoneState1">
+                            ปิด
+                        </span>
+                    </div>
+
+                    <div class="zone-small" id="homeZone2">
+                        <span class="zone-number">02</span>
+                        <span class="zone-name">
+                            <h2>วาล์ว 2</h2>
+                        </span>
+                        <span class="zone-state" id="homeZoneState2">
+                            ปิด
+                        </span>
+                    </div>
+
+                    <div class="zone-small" id="homeZone3">
+                        <span class="zone-number">03</span>
+                        <span class="zone-name">
+                            <h2>วาล์ว 3</h2>
+                        </span>
+                        <span class="zone-state" id="homeZoneState3">
+                            ปิด
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+        <section class="page" id="pageControl">
+
+            <div class="page-title-block">
+                <div class="page-back" onclick="showPage('home')">‹</div>
+
+                <div>
+                    <div class="page-title">Water Control</div>
+                    <div class="page-subtitle">ควบคุมระบบรดน้ำ</div>
+                </div>
+            </div>
+
+            <div class="glass-card control-mode-card">
+
+                <div class="section-label">โหมดการทำงาน</div>
+
+                <div class="mode-switch">
+
+                    <button id="manualModeButton" class="mode-button active" onclick="setMode('manual')">
+                        <span>✋</span>
+
+                        <div>
+                            <strong>MANUAL</strong>
+                            <small>ควบคุมเอง</small>
+                        </div>
+                    </button>
+
+                    <button id="autoModeButton" class="mode-button" onclick="setMode('auto')">
+                        <span>⚙</span>
+
+                        <div>
+                            <strong>AUTO</strong>
+                            <small>ทำงานอัตโนมัติ</small>
+                        </div>
+                    </button>
+
+                </div>
+
+                <div class="mode-description" id="modeDescription">
+                    เลือกวาล์ว แล้วกดเริ่มทำงาน
+                </div>
+
+            </div>
+
+            <div class="glass-card control-zone-card">
+
+                <div class="section-heading">
+
+                    <div>
+                        <div class="card-title">เลือกวาล์วน้ำ</div>
+
+                        <div class="card-subtitle" id="selectionDescription">
+                            แตะวาล์วเพื่อเลือกพื้นที่ที่ต้องการรดน้ำ
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="selected-summary" id="selectedSummary">
+                    ยังไม่ได้เลือกวาล์ว
+                </div>
+
+                <div class="large-zone-list">
+
+                    <button class="large-zone" id="controlZone1" onclick="selectValve(1)">
+
+                        <div class="large-zone-left">
+
+                            <div class="large-zone-icon">💧</div>
+
+                            <div>
+                                <strong>วาล์ว 1</strong>
+                                <span>พื้นที่รดน้ำ 01</span>
+                            </div>
+
+                        </div>
+
+                        <div class="large-zone-right">
+
+                            <span id="controlZoneState1">
+                                ไม่ได้เลือก
+                            </span>
+
+                            <div class="switch" id="valveSwitch1">
+                                <div></div>
+                            </div>
+
+                        </div>
+
+                    </button>
+
+                    <button class="large-zone" id="controlZone2" onclick="selectValve(2)">
+
+                        <div class="large-zone-left">
+
+                            <div class="large-zone-icon">💧</div>
+
+                            <div>
+                                <strong>วาล์ว 2</strong>
+                                <span>พื้นที่รดน้ำ 02</span>
+                            </div>
+
+                        </div>
+
+                        <div class="large-zone-right">
+
+                            <span id="controlZoneState2">
+                                ไม่ได้เลือก
+                            </span>
+
+                            <div class="switch" id="valveSwitch2">
+                                <div></div>
+                            </div>
+
+                        </div>
+
+                    </button>
+
+                    <button class="large-zone" id="controlZone3" onclick="selectValve(3)">
+
+                        <div class="large-zone-left">
+
+                            <div class="large-zone-icon">💧</div>
+
+                            <div>
+                                <strong>วาล์ว 3</strong>
+                                <span>พื้นที่รดน้ำ 03</span>
+                            </div>
+
+                        </div>
+
+                        <div class="large-zone-right">
+
+                            <span id="controlZoneState3">
+                                ไม่ได้เลือก
+                            </span>
+
+                            <div class="switch" id="valveSwitch3">
+                                <div></div>
+                            </div>
+
+                        </div>
+
+                    </button>
+
+                </div>
+
+                <button class="start-button" id="startButton" onclick="startSystem()">
+                    <span>▶</span>
+                    เริ่มทำงาน
+                </button>
+
+            </div>
+
+            <button class="stop-button" onclick="stopSystem()">
+                <span>■</span>
+                หยุดระบบทั้งหมด
+            </button>
+
+        </section>
+
+        <section class="page" id="pageSchedule">
+
+            <div class="page-title-block">
+
+                <div class="page-back" onclick="showPage('home')">
+                    ‹
+                </div>
+
+                <div>
+                    <div class="page-title">Water Schedule</div>
+                    <div class="page-subtitle">
+                        ตั้งเวลารดน้ำอัตโนมัติ
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="glass-card schedule-card">
+
+                <div class="card-heading">
+
+                    <div>
+                        <div class="card-title">เวลารดน้ำ</div>
+                        <div class="card-subtitle">
+                            กำหนดเวลาได้ 3 ช่วงต่อวัน
+                        </div>
+                    </div>
+
+                    <div class="round-icon">◷</div>
+
+                </div>
+
+                <div class="schedule-list">
+
+                    <div class="schedule-item">
+
+                        <div class="schedule-number">01</div>
+
+                        <div class="schedule-info">
+                            <span>ช่วงเวลาที่ 1</span>
+                            <strong>เช้า</strong>
+                        </div>
+
+                        <input type="time" id="autoTime1" value="09:00">
+
+                    </div>
+
+                    <div class="schedule-item">
+
+                        <div class="schedule-number">02</div>
+
+                        <div class="schedule-info">
+                            <span>ช่วงเวลาที่ 2</span>
+                            <strong>บ่าย</strong>
+                        </div>
+
+                        <input type="time" id="autoTime2" value="14:00">
+
+                    </div>
+
+                    <div class="schedule-item">
+
+                        <div class="schedule-number">03</div>
+
+                        <div class="schedule-info">
+                            <span>ช่วงเวลาที่ 3</span>
+                            <strong>เย็น</strong>
+                        </div>
+
+                        <input type="time" id="autoTime3" value="17:00">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="glass-card setting-card">
+
+                <div class="card-heading">
+
+                    <div>
+                        <div class="card-title">เงื่อนไขการรดน้ำ</div>
+                        <div class="card-subtitle">
+                            ระบบจะใช้ค่าด้านล่างในการตัดสินใจ
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="setting-row">
+
+                    <div>
+                        <span>ความชื้นดินขั้นต่ำ</span>
+                        <small>ถ้าต่ำกว่าค่านี้ ระบบจะรดน้ำ</small>
+                    </div>
+
+                    <div class="number-control">
+                        <input type="number" id="soilSetpoint" min="1" max="100" value="40">
+                        <span>%</span>
+                    </div>
+
+                </div>
+
+                <div class="soil-slider-wrap">
+
+                    <input type="range" id="thresholdSlider" min="1" max="100" value="40">
+
+                    <div class="slider-labels">
+                        <span>แห้ง</span>
+                        <strong id="thresholdValue">40%</strong>
+                        <span>ชื้น</span>
+                    </div>
+
+                </div>
+
+                <div class="setting-row">
+
+                    <div>
+                        <span>ระยะเวลารดน้ำ</span>
+                        <small>เวลาทำงานของแต่ละรอบ</small>
+                    </div>
+
+                    <div class="number-control">
+                        <input type="number" id="wateringDuration" min="1" max="120" value="5">
+                        <span>นาที</span>
+                    </div>
+
+                </div>
+
+                <button class="save-button" onclick="saveAutoSettings()">
+                    บันทึกการตั้งค่า
+                </button>
+
+                <div class="save-message" id="saveMessage"></div>
+
+            </div>
+
+        </section>
+
+        <section class="page" id="pageSettings">
+
+            <div class="page-title-block">
+
+                <div class="page-back" onclick="showPage('home')">
+                    ‹
+                </div>
+
+                <div>
+                    <div class="page-title">Settings</div>
+                    <div class="page-subtitle">
+                        สถานะและการตั้งค่าระบบ
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="glass-card profile-card">
+
+                <div class="profile-big">🌱</div>
+
+                <div>
+                    <div class="profile-title">
+                        Smart Farm Controller
+                    </div>
+
+                    <div class="profile-subtitle">
+                        ระบบควบคุมสวนอัจฉริยะ
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="glass-card info-card">
+
+                <div class="info-row">
+
+                    <div class="info-icon">☁</div>
+
+                    <div>
+                        <span>Firebase</span>
+                        <small id="firebaseText">
+                            กำลังตรวจสอบ
+                        </small>
+                    </div>
+
+                    <div class="status-dot" id="firebaseDot"></div>
+
+                </div>
+
+                <div class="info-row">
+
+                    <div class="info-icon">⚡</div>
+
+                    <div>
+                        <span>ESP32 Controller</span>
+                        <small id="deviceSettingsText">
+                            กำลังตรวจสอบ
+                        </small>
+                    </div>
+
+                    <div class="status-dot" id="deviceDot"></div>
+
+                </div>
+
+                <div class="info-row">
+
+                    <div class="info-icon">💨</div>
+
+                    <div>
+                        <span>พัดลม</span>
+                        <small id="fanSettingsText">
+                            กำลังตรวจสอบ
+                        </small>
+                    </div>
+
+                </div>
+
+                <div class="info-row">
+
+                    <div class="info-icon">◷</div>
+
+                    <div>
+                        <span>อัปเดตล่าสุด</span>
+                        <small id="lastUpdate">--</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button class="emergency-button" onclick="stopSystem()">
+                <span>■</span>
+                หยุดระบบฉุกเฉิน
+            </button>
+
+        </section>
+
+    </main>
+
+    <nav class="bottom-nav">
+
+        <button class="nav-item active" id="navHome" onclick="showPage('home')">
+            <span>⌂</span>
+            <small>หน้าแรก</small>
+        </button>
+
+        <button class="nav-item" id="navControl" onclick="showPage('control')">
+            <span>💧</span>
+            <small>ควบคุมน้ำ</small>
+        </button>
+
+        <button class="nav-item" id="navSchedule" onclick="showPage('schedule')">
+            <span>◷</span>
+            <small>ตั้งเวลา</small>
+        </button>
+
+        <button class="nav-item" id="navSettings" onclick="showPage('settings')">
+            <span>⚙</span>
+            <small>ตั้งค่า</small>
+        </button>
+
+    </nav>
+
+    <div class="toast" id="toast"></div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
