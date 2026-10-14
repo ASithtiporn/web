@@ -110,7 +110,7 @@ button:disabled {
     align-items: center;
     gap: 5px;
     margin-top: -2px;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 400;
     opacity: 0.75;
 }
@@ -190,7 +190,7 @@ button:disabled {
 }
 
 .date-text {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 300;
     opacity: 0.78;
 }
